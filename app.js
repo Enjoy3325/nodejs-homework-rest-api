@@ -3,8 +3,9 @@ const logger = require('morgan')
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
-// const {validateBody} = require('./utils');
-const router = require('./routes/api')
+
+const { contactRouter } = require('./routes/api')
+const { authRouter } = require('./routes/api');
 
 const app = express()
 
@@ -16,7 +17,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/api/contacts', router)
+app.use('/users/register', authRouter)
+app.use('/api/contacts', contactRouter)
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' })

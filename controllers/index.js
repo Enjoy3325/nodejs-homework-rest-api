@@ -3,7 +3,8 @@ const { listContacts,
     addContact,
     updateContact,
     removeContact,
-    updateStatusContact} = require("./contacts")
+    updateStatusContact } = require("./contacts")
+const {registerUser, } = require('./auth');
 
 module.exports = {
     listContacts,
@@ -12,4 +13,5 @@ module.exports = {
     updateContact,
     updateStatusContact,
     removeContact,
+    registerUser
 }

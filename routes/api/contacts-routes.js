@@ -1,7 +1,7 @@
 const express = require('express')
 const ctrl = require('../../controllers');
 const { validateBody } = require('../../utils');
-const { schemas } = require('../../models');
+const { schemas } = require('../../models/contact');
 
 const router = express.Router()
 
