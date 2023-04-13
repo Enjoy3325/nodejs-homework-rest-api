@@ -1,8 +1,9 @@
 const { Schema, model } = require('mongoose')
 const Joi = require('joi');
-const {handleMongooseError} = require('../utils');
+const { handleMongooseError } = require('../../utils');
+
 const phoneRegular = /^\?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/
-// const phoneRegular = /^\d{3} \d{3}-\d{4}$/
+
 const contactSchema = new Schema(
       {
     name: {
@@ -60,4 +61,7 @@ const schemas = {
 }
 const Contact = model("contact", contactSchema)
 
-module.exports = { Contact, schemas};
+module.exports = {
+  Contact,
+  schemas
+};

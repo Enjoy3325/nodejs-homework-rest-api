@@ -8,7 +8,7 @@ const removeContact = require('./removeContact');
 
 
 module.exports = {
-   listContacts: ctrlWrapper(listContacts),
+  listContacts: ctrlWrapper(listContacts),
   getContactById: ctrlWrapper(getContactById),
   addContact: ctrlWrapper(addContact),
   updateContact: ctrlWrapper(updateContact),

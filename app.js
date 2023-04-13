@@ -4,8 +4,8 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
-const { contactRouter } = require('./routes/api')
-const { authRouter } = require('./routes/api');
+const { contactRouter,
+  userRouter } = require('./routes/api')
 
 const app = express()
 
@@ -17,8 +17,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/users/register', authRouter)
-app.use('/api/contacts', contactRouter)
+app.use("/api/users", userRouter)
+app.use("/api/contacts", contactRouter)
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' })
