@@ -2,7 +2,7 @@
 const express = require('express');
 const { users: ctrl }  = require('../../../controllers');
 const {validateBody}  = require('../../../utils');
-const { user: schemas }  = require('../../../models');
+const schemas   = require('../../../models');
 // Створюємо роутер в який ми будемо записувати маршрути
 const router = express.Router()
 
