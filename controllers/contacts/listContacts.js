@@ -1,5 +1,10 @@
 const { Contact } = require('../../models/contact/contact');
 
+// const listContacts = async (req, res) => {
+//   const result = await Contact.find({})
+//   res.json(result)
+// }
+
 const listContacts = async (req, res) => {
   console.log(req.user);
   const { _id: owner } = req.user;
