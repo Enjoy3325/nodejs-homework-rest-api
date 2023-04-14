@@ -3,41 +3,44 @@ const Joi = require('joi');
 const { handleMongooseError } = require('../../utils');
 
 const phoneRegular = /^\?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/
+const emailRegular = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 
 const contactSchema = new Schema(
-      {
+  {
     name: {
       type: String,
       required: [true, 'Set name for contact'],
     },
     email: {
-        type: String,
-        require: [true, 'Set email for contact']
+      type: String,
+      match: emailRegular,
+      require: [true, 'Set email for contact']
     },
     phone: {
-        type:String,
-        match: phoneRegular,
-        require: [true, 'Set phone for contact']
+      type: String,
+      match: phoneRegular,
+      require: [true, 'Set phone for contact']
     },
     favorite: {
       type: Boolean,
       default: false,
     },
-      owner: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: 'user',
+      required: true,
     }
-    }, { versionKey: false })
-  
+  }, { versionKey: false })
+
 contactSchema.post("save", handleMongooseError)
 
-    const addShema = Joi.object({
+const addShema = Joi.object({
   name: Joi.string().required().messages({
     "any.required": `"name" is required`,
     "string.empty": `"name" cannot be empty`,
     "string.base": `"name" must be string`
   }),
-  email: Joi.string().required().messages({
+  email: Joi.string().pattern(emailRegular).required().messages({
     "any.required": `"email" is required`,
     "string.empty": `"email" cannot be empty`,
     "string.base": `"email" must be string`

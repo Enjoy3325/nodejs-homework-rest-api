@@ -15,8 +15,8 @@ const userSchema = new Schema(
         email: {
             type: String,
             match: emailRegular,
-            required: [true, 'Email is required'],
             unique: true,
+            required: [true, 'Email is required'],
         },
         subscription: {
             type: String,
