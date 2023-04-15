@@ -1,6 +1,6 @@
-const { User } = require('../user');
-const { schemas } = require('../user');
+const  user  = require('./user');
+const  schemas  = require('./user');
 module.exports = {
-  User,
+  user,
   schemas
 }

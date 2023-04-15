@@ -1,7 +1,7 @@
 const express = require('express')
 const { contacts: ctrl } = require('../../../controllers');
 const { isValidId } = require('../../../middlewares');
-const { validateBody } = require('../../../utils');
+const validateBody   = require('../../../utils');
 const schemas  = require('../../../models');
 
 const router = express.Router()

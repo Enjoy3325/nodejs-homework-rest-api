@@ -1,20 +1,20 @@
 // const {hashPassword} = require('../../hashPassword');
-const { User } = require('../../models');
+const user  = require('../../models');
 const {HttpError}= require('../../helpers');
 
 const registerUser = async (req, res) => {
   console.log(req.body);
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const userFind = await user.user.user.User.findOne({ email });
     
-  if (user) {
+  if (userFind) {
     throw HttpError(409, "Email in use");
   }
   // hashPassword(password)
   
   res.status(200).json({
-    user: {
-      email: user.email,
+    userFind: {
+      email: userFind.email,
     },
         
   });
