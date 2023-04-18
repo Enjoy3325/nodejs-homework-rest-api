@@ -13,4 +13,4 @@ function HttpError(status, message = errorMessage[status]) {
     return error;
 }
 
-module.exports = HttpError;
+module.exports =  HttpError ;

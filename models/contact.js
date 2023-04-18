@@ -3,10 +3,12 @@ const Joi = require('joi');
 const {handleMongooseError} = require('../utils');
 
 const phoneRegular = (/^\(\d{3}\)\s\d{3}-\d{4}$/)
+const emailRegular = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 const contactSchema = new Schema(
       {
     name: {
-      type: String,
+          type: String,
+      match: emailRegular,
       required: [true, 'Set name for contact'],
     },
     email: {
@@ -22,7 +24,12 @@ const contactSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    }, { versionKey: false })
+     owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
+    }, { versionKey: false, timestamps: true })
   
 contactSchema.post("save", handleMongooseError)
 
@@ -32,7 +39,7 @@ contactSchema.post("save", handleMongooseError)
     "string.empty": `"name" cannot be empty`,
     "string.base": `"name" must be string`
   }),
-  email: Joi.string().required().messages({
+  email: Joi.string().pattern(emailRegular).required().messages({
     "any.required": `"email" is required`,
     "string.empty": `"email" cannot be empty`,
     "string.base": `"email" must be string`
@@ -47,8 +54,9 @@ contactSchema.post("save", handleMongooseError)
 const updateSchemaContact = Joi.object({
   favorite: Joi.boolean().required().messages({
     "any.required": `missing field "favorite"`,
+    "string.empty": `"favorite" cannot be empty`,
   }),
-})
+});
 
 const schemas = {
   addShema,
@@ -56,4 +64,7 @@ const schemas = {
 }
 const Contact = model("contact", contactSchema)
 
-module.exports = { Contact, schemas};
+module.exports = {
+  Contact,
+  schemas
+};

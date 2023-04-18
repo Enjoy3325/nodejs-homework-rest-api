@@ -1,5 +1,5 @@
-const { Contact }  = require('../../models');
-const { HttpError } = require('../../helpers');
+const { Contact } = require('../../models');
+const {HttpError} = require('../../helpers');
 
 const getContactById = async (req, res) => {
   const { contactId } = req.params;
@@ -10,4 +10,4 @@ const getContactById = async (req, res) => {
   res.json(result)
 }
 
-module.exports = getContactById;
+module.exports = {getContactById};
